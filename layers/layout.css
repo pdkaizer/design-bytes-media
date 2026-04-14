@@ -1,0 +1,32 @@
+@layer layout {
+
+  /* ── Centred wrapper ────────────────────────────────────────── */
+  .site-header__inner,
+  .hero__inner,
+  .about__inner,
+  .publications__inner,
+  .pull-quote__inner,
+  .contact__inner,
+  .site-footer__inner {
+    inline-size: min(var(--max-width), 100% - (var(--page-gutter) * 2));
+    margin-inline: auto;
+  }
+
+  /* ── Section rhythm ─────────────────────────────────────────── */
+  .about,
+  .publications,
+  .pull-quote,
+  .contact {
+    padding-block: var(--sp-24);
+  }
+
+  /* Media query: global page-level adjustments only */
+  @media (max-width: 48em) {
+    .about,
+    .publications,
+    .pull-quote,
+    .contact {
+      padding-block: var(--sp-16);
+    }
+  }
+}

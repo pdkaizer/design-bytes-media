@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Design Bytes Media — a publishing imprint at the intersection of design and digital culture.">
+  <title>Design Bytes Media</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ── Site Header ───────────────────────────────────────── -->
+  <header class="site-header" role="banner">
+    <div class="site-header__inner">
+      <a href="#" class="site-logo" aria-label="Design Bytes Media — home">
+        <span class="site-logo__mark" aria-hidden="true">DBM</span>
+        <span class="site-logo__name">Design Bytes Media</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <ul role="list">
+          <li><a href="#about">About</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle color theme" type="button">
+        <svg class="theme-toggle__icon theme-toggle__icon--sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+        </svg>
+        <svg class="theme-toggle__icon theme-toggle__icon--moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ── Hero ─────────────────────────────────────────────── -->
+    <section class="hero" id="top">
+      <div class="hero__inner">
+        <div class="hero__eyebrow">
+          <span>Publishing Imprint</span>
+          <span class="hero__eyebrow-line" aria-hidden="true"></span>
+          <span>Est. 2024</span>
+        </div>
+        <h1 class="hero__heading">
+          <em>Design</em><br>
+          Bytes<br>
+          Media
+        </h1>
+        <p class="hero__tagline">Ideas at the intersection<br>of design and digital culture.</p>
+        <a href="#publications" class="btn btn--primary">Explore Publications</a>
+      </div>
+      <div class="hero__decoration" aria-hidden="true">
+        <div class="hero__decoration-ring hero__decoration-ring--1"></div>
+        <div class="hero__decoration-ring hero__decoration-ring--2"></div>
+        <div class="hero__decoration-ring hero__decoration-ring--3"></div>
+      </div>
+    </section>
+
+    <!-- ── About ─────────────────────────────────────────────── -->
+    <section class="about" id="about">
+      <div class="about__inner">
+        <div class="about__label">
+          <span>About</span>
+        </div>
+        <div class="about__content">
+          <h2 class="about__heading">We publish ideas<br>worth holding onto.</h2>
+          <div class="about__body">
+            <p>Design Bytes Media is an independent publishing imprint dedicated to thoughtful writing at the intersection of design thinking, digital craft, and visual culture. We believe that the best design ideas deserve a permanent home — beyond the feed, beyond the ephemeral scroll.</p>
+            <p>From deep-dive essays on typographic systems to rigorous explorations of how screens have reshaped our visual vocabulary, our publications are made for practitioners who want to think as well as make.</p>
+          </div>
+          <ul class="about__pillars" role="list">
+            <li>
+              <strong>Craft</strong>
+              <span>Precision in every detail, from argument to layout.</span>
+            </li>
+            <li>
+              <strong>Depth</strong>
+              <span>Long-form thinking over hot takes.</span>
+            </li>
+            <li>
+              <strong>Independence</strong>
+              <span>No algorithms. No sponsors. Just ideas.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Publications ──────────────────────────────────────── -->
+    <section class="publications" id="publications">
+      <div class="publications__inner">
+        <header class="publications__header">
+          <div class="publications__label"><span>Publications</span></div>
+          <h2>Recent titles</h2>
+        </header>
+
+        <div class="publications__grid" role="list">
+
+          <article class="pub-card" role="listitem">
+            <div class="pub-card__cover pub-card__cover--one" aria-hidden="true">
+              <span class="pub-card__cover-text">01</span>
+            </div>
+            <div class="pub-card__body">
+              <span class="pub-card__category">Typography</span>
+              <h3 class="pub-card__title">The Grid System Revisited</h3>
+              <p class="pub-card__desc">A fresh examination of how modular grids evolved from print to pixel — and what we lost along the way.</p>
+              <a href="#" class="pub-card__link">Learn more <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <article class="pub-card" role="listitem">
+            <div class="pub-card__cover pub-card__cover--two" aria-hidden="true">
+              <span class="pub-card__cover-text">02</span>
+            </div>
+            <div class="pub-card__body">
+              <span class="pub-card__category">Motion & Animation</span>
+              <h3 class="pub-card__title">Type in Motion</h3>
+              <p class="pub-card__desc">When letters move, meaning shifts. An exploration of kinetic typography across broadcast, web, and film.</p>
+              <a href="#" class="pub-card__link">Learn more <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <article class="pub-card" role="listitem">
+            <div class="pub-card__cover pub-card__cover--three" aria-hidden="true">
+              <span class="pub-card__cover-text">03</span>
+            </div>
+            <div class="pub-card__body">
+              <span class="pub-card__category">Design Systems</span>
+              <h3 class="pub-card__title">Pixel Perfect</h3>
+              <p class="pub-card__desc">The making and unmaking of design systems: how teams align on visual language at scale.</p>
+              <a href="#" class="pub-card__link">Learn more <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <article class="pub-card" role="listitem">
+            <div class="pub-card__cover pub-card__cover--four" aria-hidden="true">
+              <span class="pub-card__cover-text">04</span>
+            </div>
+            <div class="pub-card__body">
+              <span class="pub-card__category">Editorial Design</span>
+              <h3 class="pub-card__title">Margins & Whitespace</h3>
+              <p class="pub-card__desc">An ode to emptiness — the role of negative space in editorial design and digital interfaces.</p>
+              <a href="#" class="pub-card__link">Learn more <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Pull Quote ─────────────────────────────────────────── -->
+    <section class="pull-quote" aria-label="Featured quote">
+      <div class="pull-quote__inner">
+        <blockquote>
+          <p>"Good design is intelligence made visible. Good writing is intelligence made shareable."</p>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ── Contact ───────────────────────────────────────────── -->
+    <section class="contact" id="contact">
+      <div class="contact__inner">
+        <div class="contact__label"><span>Stay in touch</span></div>
+        <h2 class="contact__heading">Get the newsletter</h2>
+        <p class="contact__desc">Occasional dispatches on design, publishing, and the digital world. No noise — just signal.</p>
+        <form class="contact__form" id="newsletterForm" novalidate>
+          <div class="contact__form-names">
+            <div class="contact__form-field">
+              <label for="firstNameInput" class="visually-hidden">First name</label>
+              <input
+                type="text"
+                id="firstNameInput"
+                name="first_name"
+                placeholder="First name"
+                autocomplete="given-name"
+              >
+            </div>
+            <div class="contact__form-field">
+              <label for="lastNameInput" class="visually-hidden">Last name</label>
+              <input
+                type="text"
+                id="lastNameInput"
+                name="last_name"
+                placeholder="Last name"
+                autocomplete="family-name"
+              >
+            </div>
+          </div>
+          <div class="contact__form-row">
+            <label for="emailInput" class="visually-hidden">Your email address</label>
+            <input
+              type="email"
+              id="emailInput"
+              name="email"
+              placeholder="your@email.com"
+              autocomplete="email"
+              required
+            >
+            <button type="submit" class="btn btn--primary">Subscribe</button>
+          </div>
+          <p class="contact__form-status" id="formStatus" aria-live="polite" hidden></p>
+        </form>
+        <p class="contact__note">No spam. Unsubscribe anytime.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Site Footer ──────────────────────────────────────────── -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="site-footer__inner">
+      <div class="site-footer__brand">
+        <span class="site-logo__mark" aria-hidden="true">DBM</span>
+        <span>Design Bytes Media</span>
+      </div>
+      <nav class="site-footer__nav" aria-label="Footer navigation">
+        <ul role="list">
+          <li><a href="#about">About</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <p class="site-footer__copy">&copy; <span id="currentYear"></span> Design Bytes Media. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
