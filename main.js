@@ -32,6 +32,18 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
 (function () {
   const MEDIA_NS = 'http://search.yahoo.com/mrss/';
 
+  // Use Netlify's server-side proxy in production; fall back to corsproxy.io locally
+  const IS_LOCAL = ['localhost', '127.0.0.1'].includes(location.hostname);
+  const PROXY_PATHS = {
+    'https://design-bytes.com/rss/':      '/_proxy/rss/design-bytes',
+    'https://streetwisegourmet.com/rss/': '/_proxy/rss/streetwise-gourmet',
+  };
+
+  function proxyUrl(rssUrl) {
+    if (!IS_LOCAL && PROXY_PATHS[rssUrl]) return PROXY_PATHS[rssUrl];
+    return `https://corsproxy.io/?${encodeURIComponent(rssUrl)}`;
+  }
+
   function stripHtml(str) {
     const el = document.createElement('div');
     el.innerHTML = str;
@@ -43,7 +55,7 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
     if (!card) return;
 
     try {
-      const proxy = `https://corsproxy.io/?${encodeURIComponent(rssUrl)}`;
+      const proxy = proxyUrl(rssUrl);
       const res   = await fetch(proxy);
       if (!res.ok) return;
 

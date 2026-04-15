@@ -1,0 +1,11 @@
+[[redirects]]
+  from   = "/_proxy/rss/design-bytes"
+  to     = "https://design-bytes.com/rss/"
+  status = 200
+  force  = true
+
+[[redirects]]
+  from   = "/_proxy/rss/streetwise-gourmet"
+  to     = "https://streetwisegourmet.com/rss/"
+  status = 200
+  force  = true
