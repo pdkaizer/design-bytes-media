@@ -28,6 +28,76 @@
 const yearEl = document.getElementById('currentYear');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+/* ── Featured article from RSS ───────────────────────────── */
+(function () {
+  const RSS_URL = 'https://design-bytes.com/rss/';
+  const PROXY = `https://api.allorigins.win/get?url=${encodeURIComponent(RSS_URL)}`;
+  const MEDIA_NS = 'http://search.yahoo.com/mrss/';
+
+  function stripHtml(str) {
+    const el = document.createElement('div');
+    el.innerHTML = str;
+    return el.textContent.trim();
+  }
+
+  async function loadFeaturedArticle() {
+    const card = document.getElementById('featuredCard');
+    if (!card) return;
+
+    try {
+      const res = await fetch(PROXY);
+      if (!res.ok) return;
+
+      const { contents } = await res.json();
+      const doc = new DOMParser().parseFromString(contents, 'text/xml');
+      const item = doc.querySelector('item');
+      if (!item) return;
+
+      const title       = stripHtml(item.querySelector('title')?.textContent || '');
+      const description = stripHtml(item.querySelector('description')?.textContent || '');
+      const siteTitle   = doc.querySelector('channel > title')?.textContent || 'Design Bytes';
+
+      // Image: prefer media:content, fall back to enclosure
+      const mediaEl  = item.getElementsByTagNameNS(MEDIA_NS, 'content')[0];
+      const imageUrl = mediaEl?.getAttribute('url')
+                       || item.querySelector('enclosure[type^="image"]')?.getAttribute('url')
+                       || '';
+
+      // Populate text fields
+      card.querySelector('.pub-card__category').textContent = siteTitle;
+      card.querySelector('.pub-card__title').textContent    = title;
+      card.querySelector('.pub-card__desc').textContent     = description;
+
+      const linkEl = card.querySelector('.pub-card__link');
+      linkEl.href = 'https://design-bytes.com';
+      linkEl.target = '_blank';
+      linkEl.rel = 'noopener noreferrer';
+      linkEl.innerHTML = 'Subscribe <span aria-hidden="true">→</span>';
+
+      // Swap the decorative cover for the article image
+      if (imageUrl) {
+        const cover = card.querySelector('.pub-card__cover');
+        cover.classList.remove('pub-card__cover--one');
+        cover.classList.add('pub-card__cover--photo');
+        cover.removeAttribute('aria-hidden');
+
+        const img = document.createElement('img');
+        img.src     = imageUrl;
+        img.alt     = title;
+        img.loading = 'lazy';
+        img.decoding = 'async';
+
+        cover.innerHTML = '';
+        cover.appendChild(img);
+      }
+    } catch {
+      // Fail silently — static fallback content remains visible
+    }
+  }
+
+  loadFeaturedArticle();
+})();
+
 /* ── Newsletter signup ────────────────────────────────────── */
 (function () {
   const GHOST_URL = 'https://design-bytes.com';
