@@ -129,26 +129,14 @@
           </article>
 
           <article class="pub-card" role="listitem">
-            <div class="pub-card__cover pub-card__cover--three" aria-hidden="true">
-              <span class="pub-card__cover-text">03</span>
+            <div class="pub-card__cover pub-card__cover--photo">
+              <img src="images/dcl-cover.png" alt="From Figma to Code — Designer Code Learning" loading="lazy" decoding="async">
             </div>
             <div class="pub-card__body">
-              <span class="pub-card__category">Design Systems</span>
-              <h3 class="pub-card__title">Pixel Perfect</h3>
-              <p class="pub-card__desc">The making and unmaking of design systems: how teams align on visual language at scale.</p>
-              <a href="#" class="pub-card__link">Learn more <span aria-hidden="true">→</span></a>
-            </div>
-          </article>
-
-          <article class="pub-card" role="listitem">
-            <div class="pub-card__cover pub-card__cover--four" aria-hidden="true">
-              <span class="pub-card__cover-text">04</span>
-            </div>
-            <div class="pub-card__body">
-              <span class="pub-card__category">Editorial Design</span>
-              <h3 class="pub-card__title">Margins & Whitespace</h3>
-              <p class="pub-card__desc">An ode to emptiness — the role of negative space in editorial design and digital interfaces.</p>
-              <a href="#" class="pub-card__link">Learn more <span aria-hidden="true">→</span></a>
+              <span class="pub-card__category">Learning</span>
+              <h3 class="pub-card__title">From Figma to Code</h3>
+              <p class="pub-card__desc">A structured path for visual designers to understand modern HTML and CSS — using the mental models you already have.</p>
+              <a href="https://designercodelearning.com" class="pub-card__link" target="_blank" rel="noopener noreferrer">Explore <span aria-hidden="true">→</span></a>
             </div>
           </article>
 
@@ -168,47 +156,61 @@
     <!-- ── Contact ───────────────────────────────────────────── -->
     <section class="contact" id="contact">
       <div class="contact__inner">
-        <div class="contact__label"><span>Stay in touch</span></div>
-        <h2 class="contact__heading">Get the newsletter</h2>
-        <p class="contact__desc">Occasional dispatches on design, publishing, and the digital world. No noise — just signal.</p>
-        <form class="contact__form" id="newsletterForm" novalidate>
+        <div class="contact__label"><span>Contact</span></div>
+        <h2 class="contact__heading">Want help launching<br>your publication?</h2>
+        <p class="contact__desc">If you have a publication idea and want assistance getting it set up, reach out. Tell us a little about what you're building.</p>
+        <form
+          class="contact__form"
+          id="contactForm"
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          novalidate
+        >
+          <input type="hidden" name="form-name" value="contact">
+          <p class="contact__form-honeypot" aria-hidden="true">
+            <label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+          </p>
           <div class="contact__form-names">
             <div class="contact__form-field">
-              <label for="firstNameInput" class="visually-hidden">First name</label>
+              <label for="nameInput" class="visually-hidden">Your name</label>
               <input
                 type="text"
-                id="firstNameInput"
-                name="first_name"
-                placeholder="First name"
-                autocomplete="given-name"
+                id="nameInput"
+                name="name"
+                placeholder="Your name"
+                autocomplete="name"
+                required
               >
             </div>
             <div class="contact__form-field">
-              <label for="lastNameInput" class="visually-hidden">Last name</label>
+              <label for="emailInput" class="visually-hidden">Your email address</label>
               <input
-                type="text"
-                id="lastNameInput"
-                name="last_name"
-                placeholder="Last name"
-                autocomplete="family-name"
+                type="email"
+                id="emailInput"
+                name="email"
+                placeholder="your@email.com"
+                autocomplete="email"
+                required
               >
             </div>
           </div>
-          <div class="contact__form-row">
-            <label for="emailInput" class="visually-hidden">Your email address</label>
-            <input
-              type="email"
-              id="emailInput"
-              name="email"
-              placeholder="your@email.com"
-              autocomplete="email"
+          <div class="contact__form-field">
+            <label for="messageInput" class="visually-hidden">Tell us about your publication</label>
+            <textarea
+              id="messageInput"
+              name="message"
+              placeholder="Tell us about your publication idea…"
+              rows="5"
               required
-            >
-            <button type="submit" class="btn btn--primary">Subscribe</button>
+            ></textarea>
+          </div>
+          <div class="contact__form-row">
+            <button type="submit" class="btn btn--primary">Send Message</button>
           </div>
           <p class="contact__form-status" id="formStatus" aria-live="polite" hidden></p>
         </form>
-        <p class="contact__note">No spam. Unsubscribe anytime.</p>
       </div>
     </section>
 

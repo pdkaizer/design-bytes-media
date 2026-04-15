@@ -124,11 +124,9 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
   });
 })();
 
-/* ── Newsletter signup ────────────────────────────────────── */
+/* ── Contact form (Netlify Forms) ─────────────────────────── */
 (function () {
-  const GHOST_URL = 'https://design-bytes.com';
-
-  const form = document.getElementById('newsletterForm');
+  const form = document.getElementById('contactForm');
   if (!form) return;
 
   const statusEl = document.getElementById('formStatus');
@@ -142,39 +140,36 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    const email = form.email.value.trim();
-    if (!email) return;
+    const name    = form.name.value.trim();
+    const email   = form.email.value.trim();
+    const message = form.message.value.trim();
 
-    const firstName = form.first_name.value.trim();
-    const lastName = form.last_name.value.trim();
-    const nameParts = [firstName, lastName].filter(Boolean);
-    const name = nameParts.length ? nameParts.join(' ') : undefined;
+    if (!name || !email || !message) return;
 
     const submitBtn = form.querySelector('[type="submit"]');
     submitBtn.disabled = true;
     statusEl.hidden = true;
 
     try {
-      const res = await fetch(`${GHOST_URL}/members/api/send-magic-link/`, {
+      const res = await fetch('/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          'form-name': 'contact',
+          name,
           email,
-          ...(name && { name }),
-          emailType: 'signup',
-        }),
+          message,
+        }).toString(),
       });
 
       if (res.ok) {
-        showStatus('Thanks! Check your inbox for a confirmation link.', 'success');
+        showStatus('Thanks! We\'ll be in touch soon.', 'success');
         form.reset();
       } else {
-        const data = await res.json().catch(() => ({}));
-        const msg = data?.errors?.[0]?.message || 'Something went wrong. Please try again.';
-        showStatus(msg, 'error');
+        showStatus('Something went wrong. Please try again.', 'error');
       }
     } catch {
-      showStatus('Could not reach the server. Please try again later.', 'error');
+      showStatus('Could not send your message. Please try again later.', 'error');
     } finally {
       submitBtn.disabled = false;
     }
