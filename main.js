@@ -28,10 +28,8 @@
 const yearEl = document.getElementById('currentYear');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-/* ── Featured article from RSS ───────────────────────────── */
+/* ── Featured articles from RSS ──────────────────────────── */
 (function () {
-  const RSS_URL = 'https://design-bytes.com/rss/';
-  const PROXY = `https://api.allorigins.win/get?url=${encodeURIComponent(RSS_URL)}`;
   const MEDIA_NS = 'http://search.yahoo.com/mrss/';
 
   function stripHtml(str) {
@@ -40,22 +38,26 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
     return el.textContent.trim();
   }
 
-  async function loadFeaturedArticle() {
-    const card = document.getElementById('featuredCard');
+  async function loadFeaturedArticle({ cardId, rssUrl, siteUrl, coverClass }) {
+    const card = document.getElementById(cardId);
     if (!card) return;
 
     try {
-      const res = await fetch(PROXY);
+      const proxy = `https://corsproxy.io/?${encodeURIComponent(rssUrl)}`;
+      const res   = await fetch(proxy);
       if (!res.ok) return;
 
-      const { contents } = await res.json();
-      const doc = new DOMParser().parseFromString(contents, 'text/xml');
+      const text = await res.text();
+      const doc  = new DOMParser().parseFromString(text, 'text/xml');
+
+      if (doc.querySelector('parsererror')) return;
+
       const item = doc.querySelector('item');
       if (!item) return;
 
       const title       = stripHtml(item.querySelector('title')?.textContent || '');
       const description = stripHtml(item.querySelector('description')?.textContent || '');
-      const siteTitle   = doc.querySelector('channel > title')?.textContent || 'Design Bytes';
+      const siteTitle   = doc.querySelector('channel > title')?.textContent?.trim() || siteUrl;
 
       // Image: prefer media:content, fall back to enclosure
       const mediaEl  = item.getElementsByTagNameNS(MEDIA_NS, 'content')[0];
@@ -69,33 +71,45 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
       card.querySelector('.pub-card__desc').textContent     = description;
 
       const linkEl = card.querySelector('.pub-card__link');
-      linkEl.href = 'https://design-bytes.com';
+      linkEl.href   = siteUrl;
       linkEl.target = '_blank';
-      linkEl.rel = 'noopener noreferrer';
+      linkEl.rel    = 'noopener noreferrer';
       linkEl.innerHTML = 'Subscribe <span aria-hidden="true">→</span>';
 
       // Swap the decorative cover for the article image
       if (imageUrl) {
         const cover = card.querySelector('.pub-card__cover');
-        cover.classList.remove('pub-card__cover--one');
+        cover.classList.remove(coverClass);
         cover.classList.add('pub-card__cover--photo');
         cover.removeAttribute('aria-hidden');
 
-        const img = document.createElement('img');
-        img.src     = imageUrl;
-        img.alt     = title;
-        img.loading = 'lazy';
+        const img    = document.createElement('img');
+        img.src      = imageUrl;
+        img.alt      = title;
+        img.loading  = 'lazy';
         img.decoding = 'async';
 
         cover.innerHTML = '';
         cover.appendChild(img);
       }
-    } catch {
-      // Fail silently — static fallback content remains visible
+    } catch (err) {
+      console.warn(`[DBM] RSS fetch failed for ${rssUrl}:`, err);
     }
   }
 
-  loadFeaturedArticle();
+  loadFeaturedArticle({
+    cardId:     'featuredCard',
+    rssUrl:     'https://design-bytes.com/rss/',
+    siteUrl:    'https://design-bytes.com',
+    coverClass: 'pub-card__cover--one',
+  });
+
+  loadFeaturedArticle({
+    cardId:     'featuredCard2',
+    rssUrl:     'https://streetwisegourmet.com/rss/',
+    siteUrl:    'https://streetwisegourmet.com',
+    coverClass: 'pub-card__cover--two',
+  });
 })();
 
 /* ── Newsletter signup ────────────────────────────────────── */
