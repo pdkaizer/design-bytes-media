@@ -5,10 +5,9 @@
   const html = document.documentElement;
   const btn = document.getElementById('themeToggle');
 
-  // Resolve initial theme: stored preference → system preference
+  // Resolve initial theme: stored preference → light
   const stored = localStorage.getItem('theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const initial = stored ?? (prefersDark ? 'dark' : 'light');
+  const initial = stored ?? 'light';
 
   html.setAttribute('data-theme', initial);
   if (btn) btn.setAttribute('aria-pressed', initial === 'dark');
