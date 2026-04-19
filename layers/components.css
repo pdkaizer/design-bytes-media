@@ -548,17 +548,18 @@
   .contact__heading {
     font-size: var(--text-3xl);
     font-weight: 300;
+    max-inline-size: 52rem;
   }
 
   .contact__desc {
     color: var(--color-text-muted);
     font-size: var(--text-lg);
-    max-inline-size: 45ch;
+    max-inline-size: 52rem;
   }
 
   .contact__form {
     inline-size: 100%;
-    max-inline-size: 32rem;
+    max-inline-size: 52rem;
     container-type: inline-size;
   }
 
